@@ -1,13 +1,15 @@
 <template>
   <div v-if="race_week" class="h-full w-full flex flex-row">
+
     <div class="flex-1 flex flex-col items-center overflow-scroll">
       <div v-for="(element, index) in shedule"
-           :class="{
-          'w-[80%] rounded-2xl text-btn-text p-2 mb-4 cursor-pointer bg-btn-bg hover:bg-btn-bg-hover': !isRaceWeek(element),
-          'w-[80%] rounded-2xl text-btn-text p-2 mb-4 cursor-pointer bg-accent-color hover:bg-btn-bg-hover': isRaceWeek(element),
-          }"
+           class="w-[80%] rounded-2xl text-btn-text p-2 cursor-pointer hover:bg-btn-bg-hover hover:text-btn-text-hover"
            @click="selectRace(element.grand_prix.id)"
            :id="`race_${element.id}`"
+           :class="{ 'mt-4': index !== 0,
+           'bg-btn-active-bg': element.grand_prix.id === race_week.grand_prix.id,
+           'bg-btn-bg': element.grand_prix.id !== race_week.grand_prix.id
+           }"
       >
         <div class="flex flex-row items-center mx-2 justify-between">
           <div class="flex flex-row items-center">
@@ -15,7 +17,7 @@
               {{ index + 1 }}
             </div>
             <div class="mr-2 h-5 w-5 flex justify-center items-center">
-              <img :src="`http://localhost:8876/storage/${element.grand_prix.country.img}`">
+              <img :src="element.grand_prix.country.img" alt="flag_country">
             </div>
             {{ element.grand_prix.title }}
           </div>
@@ -25,10 +27,11 @@
         </div>
       </div>
     </div>
-    <div class="flex-1">
+
+    <div class="flex-1 overflow-scroll">
       <div class="bg-red-300 rounded-2xl overflow-hidden">
-        <div class="flex justify-center">
-          <img :src="race_week.grand_prix.img" alt="track" class="mb-4 h-[35vh] w-full"
+        <div class="flex justify-center min-h-[300px]">
+          <img :src="race_week.grand_prix.img" alt="track" class="mb-4 h-[35vh] w-full min-h-[300px]"
           >
         </div>
         <div class="p-4">
@@ -44,6 +47,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -51,7 +55,7 @@
 import AppLink from '@/components/Elements/AppLink.vue';
 import api from '@/api';
 import moment from 'moment';
-import logger from '@fortawesome/vue-fontawesome/src/logger';
+
 import sheduleMock from '../../public/mocks/shedule';
 
 export default {
@@ -70,7 +74,6 @@ export default {
     getShedule() {
       // api.get('http://localhost:8876/api/v1/shedule').then(res => {
       //   this.shedule = res.data
-      //   console.log(this.shedule)
 
       this.shedule = sheduleMock;
 
@@ -79,11 +82,11 @@ export default {
           this.race_week = race;
         }
       });
-      console.log(this.race_week);
       // })
     },
     selectRace(id) {
       this.race_week = this.shedule.find((race) => race.grand_prix.id === id);
+      console.log(this.race_week);
     },
     isRaceWeek(element) {
       return new Date(this.getRace(element.events).event_time) < new Date();
