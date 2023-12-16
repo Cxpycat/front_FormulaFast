@@ -1,0 +1,40 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+    purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+    content: [],
+    theme: {
+        extend: {
+            colors: {
+                'bg-default': '#0d0d0d',
+                'bg-primary': '#1a1a1a',
+                'bg-primary-disabled': '#262626',
+                'bg-inverse': '#f2f2f2',
+                'text-color-default': '#f2f2f2',
+                'text-color-secondary': '#a2a2a2',
+                'text-color-secondary-disabled': '#a1a1a1',
+                'text-inverse': '#1a1a1a',
+                'accent-color': '#ea5f5f',
+                'button-color': '#666',
+                'hover-button-color': '#999',
+                'border-color': '#602850',
+                'btn-bg': '#595ebe',
+                'btn-text': '#e1e1e7',
+                'btn-active-bg': '#be599e',
+                'btn-active-text': '#e1e1e7',
+                'active-element-bg-color': '#333',
+                'modal-bg-color': '#153043',
+                'notification-color': '#f90',
+                'success-color': '#0c6',
+                'error-color': '#f33',
+                'hover-link-color': '#f93',
+                'hover-bg': '#153f5f',
+                'btn-bg-hover': '#ea5f5f',
+                'btn-text-hover': '#030000',
+                'btn-active-bg-hover': '#72ea5f',
+                'btn-active-text-hover': '#9e80ab',
+            },
+        },
+    },
+    plugins: [],
+}
+
