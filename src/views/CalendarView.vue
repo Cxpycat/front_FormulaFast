@@ -36,13 +36,22 @@
         </div>
         <div class="p-4">
           <h1 class="text-4xl font-bold">{{ race_week.grand_prix.title }}</h1>
-          <div>
-            <div class="flex flex-col flex-wrap h-[150px] my-4">
-              <div class="flex flex-col mb-4 text-xl" v-for="(event, index) in race_week.events">
+          <div class="flex flex-col gap-2 min-h-[150px] mt-4">
+            <template v-for="(event, index) in race_week.events">
+
+              <h3 class="flex text-2xl font-bold capitalize"
+                  :class="{'mt-2': index !== 0}"
+                  v-if="index === 0 || index === 2 || index === 4">
+                {{ moment(event.event_time).format('dddd') }}
+              </h3>
+
+              <div class="flex text-xl gap-4">
                 <div>{{ event.title }}</div>
                 <div>{{ moment(event.event_time).format('HH:mm') }}</div>
               </div>
-            </div>
+
+            </template>
+
           </div>
         </div>
       </div>
@@ -55,6 +64,7 @@
 import AppLink from '@/components/Elements/AppLink.vue';
 import api from '@/api';
 import moment from 'moment';
+import 'moment/dist/locale/ru';
 
 import sheduleMock from '../../public/mocks/shedule';
 
@@ -97,6 +107,7 @@ export default {
   },
   computed: {
     moment() {
+      moment.locale('ru');
       return moment;
     },
   },
