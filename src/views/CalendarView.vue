@@ -66,8 +66,6 @@ import api from '@/api';
 import moment from 'moment';
 import 'moment/dist/locale/ru';
 
-import sheduleMock from '../../public/mocks/shedule';
-
 export default {
   name: 'CalendarView',
   components: {AppLink},
@@ -82,17 +80,16 @@ export default {
   },
   methods: {
     getShedule() {
-      // api.get('http://localhost:8876/api/v1/shedule').then(res => {
-      //   this.shedule = res.data
+      api.get('http://localhost:8876/api/v1/shedule').then(res => {
+        this.shedule = res.data
 
-      this.shedule = sheduleMock;
 
       this.shedule.forEach((race) => {
         if (this.isRaceWeek(race)) {
           this.race_week = race;
         }
       });
-      // })
+      })
     },
     selectRace(id) {
       this.race_week = this.shedule.find((race) => race.grand_prix.id === id);
