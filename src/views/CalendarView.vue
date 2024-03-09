@@ -56,7 +56,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -80,9 +79,8 @@ export default {
   },
   methods: {
     getShedule() {
-      api.get('http://localhost:8876/api/v1/shedule').then(res => {
+      api.get('http://localhost:8876/api/v1/schedule?year=2024').then(res => {
         this.shedule = res.data
-
 
       this.shedule.forEach((race) => {
         if (this.isRaceWeek(race)) {

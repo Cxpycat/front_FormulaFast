@@ -8,6 +8,10 @@ const router = createRouter({
             name: 'Главная',
             component: () => import('../views/HomeView.vue'),
         }, {
+            path: '/news/:id',
+            name: 'Новость',
+            component: () => import('../views/NewsView.vue'),
+        }, {
             path: '/login',
             name: 'Авторизация',
             component: () => import('../views/LoginView.vue'),
@@ -37,8 +41,7 @@ router.beforeEach((to, fromm, next) => {
     if (!accessToken) {
         if (to.name !== 'Профиль') {
             return next();
-        }
-        else {
+        } else {
             return next({
                 name: 'Авторизация',
             });

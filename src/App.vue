@@ -9,7 +9,7 @@
           <AppLink title="Регистрация" to="/register" :active="$route.path==='/register'"/>
         </div>
       </div>
-      <div class="p-8 pt-4 h-[100%] w-[100%] overflow-scroll">
+      <div class="p-8 pt-4 h-[100%] w-[100%] overflow-scroll my-4">
         <RouterView/>
       </div>
     </div>
